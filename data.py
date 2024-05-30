@@ -2,7 +2,6 @@
 import numpy as np
 import torch
 import torch.nn as nn
-import pickle
 import xml.etree.ElementTree as ET
 from datetime import datetime
 from sklearn.model_selection import train_test_split
@@ -17,6 +16,8 @@ from transformers import AutoTokenizer, Trainer
 
 from datasets import Dataset
 from accelerate import Accelerator
+import fickling
+
 # Imports specific to the custom peft lora model
 
 
@@ -62,16 +63,16 @@ def compute_loss(model, inputs):
 
 # Load the data from pickle files (replace with your local paths)
 with open("data/train_sequences_chunked_by_family.pkl", "rb") as f:
-    train_sequences = pickle.load(f)
+    train_sequences = fickling.load(f)
 
 with open("data/test_sequences_chunked_by_family.pkl", "rb") as f:
-    test_sequences = pickle.load(f)
+    test_sequences = fickling.load(f)
 
 with open("data/train_labels_chunked_by_family.pkl", "rb") as f:
-    train_labels = pickle.load(f)
+    train_labels = fickling.load(f)
 
 with open("data/test_labels_chunked_by_family.pkl", "rb") as f:
-    test_labels = pickle.load(f)
+    test_labels = fickling.load(f)
 
 # Tokenization
 tokenizer = AutoTokenizer.from_pretrained("facebook/esm2_t12_35M_UR50D")
